@@ -5,16 +5,30 @@
 // are run at the time the original page is parsed). On the
 // other hand, images injected into the DOM are loaded at that
 // time, and if the loading fails, then the onerror event
-//handler is called.
+// handler is called.
+
 const userInputInHTML = (input) => {
   const p = document.getElementById("pleaseNo")
   // Bad
-  p.innerHTML = input;
+  // p.innerHTML = input;
 
   // Better
-  // var textnode = document.createTextNode(input);
-  // p.appendChild(textnode);
+  var textnode = document.createTextNode(input);
+  p.appendChild(textnode);
 }
+
+// SECURITY
+// - Injections
+//   most common attacks - SQL injection
+//   injecting a code into another
+
+//   - Sanitize input - only allow the expected input, WHITELIST/BLACKLIST
+//     check the input - if not the proper type, discard it
+//   - Parametrize Queries, prepared SQL statements with functions 
+//   - Knex.js or other ORMS
+//   - DON'T TRUST USER INPUT
+
+
 const sendToServer = () => {
   const input = document.querySelector('#userinput').value;
   userInputInHTML(input)
